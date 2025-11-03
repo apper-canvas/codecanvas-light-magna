@@ -1,0 +1,104 @@
+[
+  {
+    "Id": 1,
+    "title": "Animated CSS Card Hover",
+    "html": "<div class=\"card\">\n  <div class=\"card-image\"></div>\n  <div class=\"card-content\">\n    <h2>Hover me!</h2>\n    <p>Beautiful hover animation</p>\n  </div>\n</div>",
+    "css": ".card {\n  width: 300px;\n  height: 400px;\n  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);\n  border-radius: 20px;\n  cursor: pointer;\n  transition: all 0.3s ease;\n  box-shadow: 0 10px 30px rgba(0,0,0,0.3);\n}\n\n.card:hover {\n  transform: translateY(-10px) rotateX(10deg);\n  box-shadow: 0 20px 40px rgba(0,0,0,0.4);\n}\n\n.card-content {\n  padding: 20px;\n  color: white;\n  text-align: center;\n}",
+    "javascript": "document.querySelector('.card').addEventListener('click', function() {\n  this.style.transform = 'scale(1.05)';\n  setTimeout(() => {\n    this.style.transform = '';\n  }, 200);\n});",
+    "thumbnail": null,
+    "author": {
+      "name": "Alex Chen",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=faces",
+      "id": "user1"
+    },
+    "views": 1847,
+    "likes": 234,
+    "createdAt": "2024-01-15T10:30:00Z",
+    "updatedAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "Id": 2,
+    "title": "Particle Canvas Animation",
+    "html": "<canvas id=\"canvas\" width=\"800\" height=\"600\"></canvas>",
+    "css": "body {\n  margin: 0;\n  padding: 0;\n  background: #000;\n  overflow: hidden;\n}\n\n#canvas {\n  display: block;\n  margin: 0 auto;\n  border: 1px solid #333;\n}",
+    "javascript": "const canvas = document.getElementById('canvas');\nconst ctx = canvas.getContext('2d');\n\nconst particles = [];\nconst particleCount = 100;\n\nclass Particle {\n  constructor() {\n    this.x = Math.random() * canvas.width;\n    this.y = Math.random() * canvas.height;\n    this.vx = (Math.random() - 0.5) * 2;\n    this.vy = (Math.random() - 0.5) * 2;\n    this.radius = Math.random() * 3 + 1;\n  }\n\n  update() {\n    this.x += this.vx;\n    this.y += this.vy;\n\n    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;\n    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;\n  }\n\n  draw() {\n    ctx.beginPath();\n    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);\n    ctx.fillStyle = '#0ff';\n    ctx.fill();\n  }\n}\n\nfor (let i = 0; i < particleCount; i++) {\n  particles.push(new Particle());\n}\n\nfunction animate() {\n  ctx.clearRect(0, 0, canvas.width, canvas.height);\n  \n  particles.forEach(particle => {\n    particle.update();\n    particle.draw();\n  });\n\n  requestAnimationFrame(animate);\n}\n\nanimate();",
+    "thumbnail": null,
+    "author": {
+      "name": "Maya Rodriguez",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=faces",
+      "id": "user2"
+    },
+    "views": 3201,
+    "likes": 458,
+    "createdAt": "2024-01-14T14:20:00Z",
+    "updatedAt": "2024-01-14T14:20:00Z"
+  },
+  {
+    "Id": 3,
+    "title": "CSS Grid Dashboard Layout",
+    "html": "<div class=\"dashboard\">\n  <header class=\"header\">Header</header>\n  <nav class=\"sidebar\">Sidebar</nav>\n  <main class=\"main\">\n    <div class=\"card\">Card 1</div>\n    <div class=\"card\">Card 2</div>\n    <div class=\"card\">Card 3</div>\n    <div class=\"card\">Card 4</div>\n  </main>\n  <footer class=\"footer\">Footer</footer>\n</div>",
+    "css": "* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\nbody {\n  font-family: 'Arial', sans-serif;\n  background: #f0f2f5;\n}\n\n.dashboard {\n  display: grid;\n  grid-template-areas:\n    'header header'\n    'sidebar main'\n    'footer footer';\n  grid-template-columns: 250px 1fr;\n  grid-template-rows: 60px 1fr 60px;\n  min-height: 100vh;\n  gap: 1px;\n}\n\n.header {\n  grid-area: header;\n  background: #2c3e50;\n  color: white;\n  display: flex;\n  align-items: center;\n  padding: 0 20px;\n  font-weight: bold;\n}\n\n.sidebar {\n  grid-area: sidebar;\n  background: #34495e;\n  color: white;\n  padding: 20px;\n}\n\n.main {\n  grid-area: main;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n  gap: 20px;\n}\n\n.card {\n  background: white;\n  padding: 20px;\n  border-radius: 8px;\n  box-shadow: 0 2px 10px rgba(0,0,0,0.1);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  min-height: 150px;\n  transition: transform 0.2s;\n}\n\n.card:hover {\n  transform: translateY(-5px);\n}\n\n.footer {\n  grid-area: footer;\n  background: #2c3e50;\n  color: white;\n  display: flex;\n  align-items: center;\n  padding: 0 20px;\n}",
+    "javascript": "// Add interactive hover effects\ndocument.querySelectorAll('.card').forEach((card, index) => {\n  card.addEventListener('mouseenter', function() {\n    this.style.background = `hsl(${index * 60}, 70%, 90%)`;\n  });\n  \n  card.addEventListener('mouseleave', function() {\n    this.style.background = 'white';\n  });\n  \n  card.addEventListener('click', function() {\n    this.style.animation = 'pulse 0.5s';\n    setTimeout(() => {\n      this.style.animation = '';\n    }, 500);\n  });\n});\n\n// Add CSS animation\nconst style = document.createElement('style');\nstyle.textContent = `\n  @keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.05); }\n    100% { transform: scale(1); }\n  }\n`;\ndocument.head.appendChild(style);",
+    "thumbnail": null,
+    "author": {
+      "name": "David Kim",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces",
+      "id": "user3"
+    },
+    "views": 2156,
+    "likes": 312,
+    "createdAt": "2024-01-13T09:45:00Z",
+    "updatedAt": "2024-01-13T09:45:00Z"
+  },
+  {
+    "Id": 4,
+    "title": "Interactive Color Palette Generator",
+    "html": "<div class=\"container\">\n  <h1>Color Palette Generator</h1>\n  <button id=\"generateBtn\">Generate New Palette</button>\n  <div id=\"palette\" class=\"palette\"></div>\n  <div class=\"info\">\n    <p>Click any color to copy its hex code!</p>\n  </div>\n</div>",
+    "css": "body {\n  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n  margin: 0;\n  padding: 20px;\n  min-height: 100vh;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.container {\n  background: rgba(255, 255, 255, 0.95);\n  padding: 40px;\n  border-radius: 20px;\n  box-shadow: 0 20px 40px rgba(0,0,0,0.1);\n  text-align: center;\n  max-width: 600px;\n  width: 100%;\n}\n\nh1 {\n  color: #333;\n  margin-bottom: 30px;\n  font-size: 2.5rem;\n}\n\n#generateBtn {\n  background: linear-gradient(45deg, #667eea, #764ba2);\n  color: white;\n  border: none;\n  padding: 12px 30px;\n  border-radius: 25px;\n  font-size: 1rem;\n  cursor: pointer;\n  margin-bottom: 30px;\n  transition: transform 0.2s;\n}\n\n#generateBtn:hover {\n  transform: translateY(-2px);\n}\n\n.palette {\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  gap: 10px;\n  margin-bottom: 20px;\n}\n\n.color-box {\n  aspect-ratio: 1;\n  border-radius: 10px;\n  cursor: pointer;\n  display: flex;\n  align-items: end;\n  justify-content: center;\n  padding: 10px;\n  transition: transform 0.2s;\n  position: relative;\n}\n\n.color-box:hover {\n  transform: scale(1.05);\n}\n\n.color-code {\n  background: rgba(0,0,0,0.7);\n  color: white;\n  padding: 4px 8px;\n  border-radius: 4px;\n  font-family: monospace;\n  font-size: 0.8rem;\n}\n\n.info {\n  color: #666;\n  font-style: italic;\n}",
+    "javascript": "function generateRandomColor() {\n  return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');\n}\n\nfunction createColorBox(color) {\n  const colorBox = document.createElement('div');\n  colorBox.className = 'color-box';\n  colorBox.style.backgroundColor = color;\n  \n  const colorCode = document.createElement('span');\n  colorCode.className = 'color-code';\n  colorCode.textContent = color.toUpperCase();\n  \n  colorBox.appendChild(colorCode);\n  \n  colorBox.addEventListener('click', () => {\n    navigator.clipboard.writeText(color.toUpperCase());\n    \n    // Visual feedback\n    const originalText = colorCode.textContent;\n    colorCode.textContent = 'COPIED!';\n    colorBox.style.transform = 'scale(0.95)';\n    \n    setTimeout(() => {\n      colorCode.textContent = originalText;\n      colorBox.style.transform = '';\n    }, 500);\n  });\n  \n  return colorBox;\n}\n\nfunction generatePalette() {\n  const palette = document.getElementById('palette');\n  palette.innerHTML = '';\n  \n  for (let i = 0; i < 5; i++) {\n    const color = generateRandomColor();\n    const colorBox = createColorBox(color);\n    palette.appendChild(colorBox);\n  }\n}\n\ndocument.getElementById('generateBtn').addEventListener('click', generatePalette);\n\n// Generate initial palette\ngeneratePalette();",
+    "thumbnail": null,
+    "author": {
+      "name": "Sarah Johnson",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=faces",
+      "id": "user4"
+    },
+    "views": 4123,
+    "likes": 567,
+    "createdAt": "2024-01-12T16:15:00Z",
+    "updatedAt": "2024-01-12T16:15:00Z"
+  },
+  {
+    "Id": 5,
+    "title": "Morphing Button Collection",
+    "html": "<div class=\"button-collection\">\n  <h2>Morphing Buttons</h2>\n  <div class=\"buttons-grid\">\n    <button class=\"morph-btn btn-1\">Hover Me</button>\n    <button class=\"morph-btn btn-2\">Click Here</button>\n    <button class=\"morph-btn btn-3\">Transform</button>\n    <button class=\"morph-btn btn-4\">Animate</button>\n    <button class=\"morph-btn btn-5\">Surprise</button>\n    <button class=\"morph-btn btn-6\">Magic</button>\n  </div>\n</div>",
+    "css": "body {\n  font-family: 'Arial', sans-serif;\n  background: radial-gradient(ellipse at center, #1e3c72 0%, #2a5298 100%);\n  margin: 0;\n  padding: 40px;\n  min-height: 100vh;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.button-collection {\n  text-align: center;\n}\n\nh2 {\n  color: white;\n  font-size: 2.5rem;\n  margin-bottom: 40px;\n  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);\n}\n\n.buttons-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n  max-width: 600px;\n}\n\n.morph-btn {\n  padding: 15px 30px;\n  border: none;\n  border-radius: 50px;\n  font-size: 1rem;\n  font-weight: bold;\n  cursor: pointer;\n  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n  position: relative;\n  overflow: hidden;\n}\n\n.btn-1 {\n  background: linear-gradient(45deg, #ff6b6b, #ee5a6f);\n  color: white;\n}\n\n.btn-1:hover {\n  transform: translateY(-5px) rotate(5deg);\n  box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);\n}\n\n.btn-2 {\n  background: linear-gradient(45deg, #4ecdc4, #44a08d);\n  color: white;\n}\n\n.btn-2:hover {\n  border-radius: 10px;\n  transform: scale(1.1);\n}\n\n.btn-3 {\n  background: linear-gradient(45deg, #45b7d1, #96c93d);\n  color: white;\n}\n\n.btn-3:hover {\n  border-radius: 0;\n  transform: skew(-10deg);\n}\n\n.btn-4 {\n  background: linear-gradient(45deg, #f093fb, #f5576c);\n  color: white;\n}\n\n.btn-4:hover {\n  animation: bounce 0.6s ease infinite;\n}\n\n@keyframes bounce {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-10px); }\n}\n\n.btn-5 {\n  background: linear-gradient(45deg, #ffecd2, #fcb69f);\n  color: #333;\n}\n\n.btn-5:hover {\n  background: linear-gradient(45deg, #a8edea, #fed6e3);\n  transform: rotateX(180deg);\n}\n\n.btn-6 {\n  background: linear-gradient(45deg, #d299c2, #fef9d7);\n  color: #333;\n}\n\n.btn-6:hover {\n  animation: pulse 1s ease-in-out infinite;\n}\n\n@keyframes pulse {\n  0% { transform: scale(1); }\n  50% { transform: scale(1.15); }\n  100% { transform: scale(1); }\n}",
+    "javascript": "// Add click effects\ndocument.querySelectorAll('.morph-btn').forEach((btn, index) => {\n  btn.addEventListener('click', function(e) {\n    // Create ripple effect\n    const ripple = document.createElement('span');\n    const rect = this.getBoundingClientRect();\n    const size = Math.max(rect.width, rect.height);\n    const x = e.clientX - rect.left - size / 2;\n    const y = e.clientY - rect.top - size / 2;\n    \n    ripple.style.cssText = `\n      position: absolute;\n      width: ${size}px;\n      height: ${size}px;\n      left: ${x}px;\n      top: ${y}px;\n      background: rgba(255, 255, 255, 0.5);\n      border-radius: 50%;\n      transform: scale(0);\n      animation: ripple 0.6s linear;\n      pointer-events: none;\n    `;\n    \n    this.appendChild(ripple);\n    \n    setTimeout(() => {\n      ripple.remove();\n    }, 600);\n  });\n});\n\n// Add CSS for ripple animation\nconst style = document.createElement('style');\nstyle.textContent = `\n  @keyframes ripple {\n    to {\n      transform: scale(2);\n      opacity: 0;\n    }\n  }\n`;\ndocument.head.appendChild(style);",
+    "thumbnail": null,
+    "author": {
+      "name": "Mike Thompson",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=faces",
+      "id": "user5"
+    },
+    "views": 2891,
+    "likes": 423,
+    "createdAt": "2024-01-11T11:30:00Z",
+    "updatedAt": "2024-01-11T11:30:00Z"
+  },
+  {
+    "Id": 6,
+    "title": "Glassmorphism Weather Card",
+    "html": "<div class=\"weather-container\">\n  <div class=\"weather-card\">\n    <div class=\"location\">\n      <h2>San Francisco</h2>\n      <p>California, USA</p>\n    </div>\n    <div class=\"weather-info\">\n      <div class=\"temperature\">22°</div>\n      <div class=\"condition\">Partly Cloudy</div>\n    </div>\n    <div class=\"details\">\n      <div class=\"detail-item\">\n        <span class=\"label\">Feels like</span>\n        <span class=\"value\">25°</span>\n      </div>\n      <div class=\"detail-item\">\n        <span class=\"label\">Humidity</span>\n        <span class=\"value\">65%</span>\n      </div>\n      <div class=\"detail-item\">\n        <span class=\"label\">Wind</span>\n        <span class=\"value\">15 km/h</span>\n      </div>\n    </div>\n  </div>\n</div>",
+    "css": "body {\n  margin: 0;\n  padding: 0;\n  min-height: 100vh;\n  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.weather-container {\n  perspective: 1000px;\n}\n\n.weather-card {\n  background: rgba(255, 255, 255, 0.25);\n  backdrop-filter: blur(10px);\n  border: 1px solid rgba(255, 255, 255, 0.18);\n  border-radius: 20px;\n  padding: 30px;\n  width: 350px;\n  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);\n  transition: transform 0.3s ease;\n}\n\n.weather-card:hover {\n  transform: rotateX(5deg) rotateY(-5deg) translateY(-10px);\n}\n\n.location h2 {\n  margin: 0 0 5px 0;\n  color: white;\n  font-size: 1.8rem;\n  font-weight: 600;\n}\n\n.location p {\n  margin: 0 0 20px 0;\n  color: rgba(255, 255, 255, 0.8);\n  font-size: 0.9rem;\n}\n\n.weather-info {\n  text-align: center;\n  margin-bottom: 30px;\n}\n\n.temperature {\n  font-size: 4rem;\n  font-weight: 300;\n  color: white;\n  margin-bottom: 10px;\n}\n\n.condition {\n  color: rgba(255, 255, 255, 0.9);\n  font-size: 1.1rem;\n}\n\n.details {\n  display: flex;\n  justify-content: space-between;\n}\n\n.detail-item {\n  text-align: center;\n}\n\n.detail-item .label {\n  display: block;\n  color: rgba(255, 255, 255, 0.7);\n  font-size: 0.8rem;\n  margin-bottom: 5px;\n}\n\n.detail-item .value {\n  color: white;\n  font-weight: 500;\n  font-size: 1rem;\n}",
+    "javascript": "// Animate card entrance\nwindow.addEventListener('load', () => {\n  const card = document.querySelector('.weather-card');\n  card.style.transform = 'translateY(50px)';\n  card.style.opacity = '0';\n  card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';\n  \n  setTimeout(() => {\n    card.style.transform = 'translateY(0)';\n    card.style.opacity = '1';\n  }, 100);\n});\n\n// Add interactive temperature conversion\nconst temperature = document.querySelector('.temperature');\nlet isCelsius = true;\n\ntemperature.addEventListener('click', () => {\n  const currentTemp = parseInt(temperature.textContent);\n  \n  if (isCelsius) {\n    const fahrenheit = Math.round((currentTemp * 9/5) + 32);\n    temperature.textContent = fahrenheit + '°F';\n  } else {\n    const celsius = Math.round((currentTemp - 32) * 5/9);\n    temperature.textContent = celsius + '°';\n  }\n  \n  isCelsius = !isCelsius;\n  \n  // Add click animation\n  temperature.style.transform = 'scale(0.95)';\n  setTimeout(() => {\n    temperature.style.transform = 'scale(1)';\n  }, 150);\n});\n\n// Add cursor pointer for temperature\ntemperature.style.cursor = 'pointer';\ntemperature.title = 'Click to convert temperature';",
+    "thumbnail": null,
+    "author": {
+      "name": "Emma Wilson",
+      "avatar": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=faces",
+      "id": "user6"
+    },
+    "views": 1654,
+    "likes": 289,
+    "createdAt": "2024-01-10T13:45:00Z",
+    "updatedAt": "2024-01-10T13:45:00Z"
+  }
+]
