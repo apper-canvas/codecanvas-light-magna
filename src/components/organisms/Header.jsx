@@ -1,11 +1,16 @@
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { AuthContext } from "@/App";
+import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import SearchBar from "@/components/molecules/SearchBar";
-import ApperIcon from "@/components/ApperIcon";
 
 const Header = () => {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.user);
+  const { logout } = useContext(AuthContext);
 
   const handleSearch = (query) => {
     if (query.trim()) {
@@ -48,20 +53,38 @@ const Header = () => {
               Trending
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-200 group-hover:w-full"></span>
             </Link>
-          </nav>
 
-          {/* Search */}
-          <div className="hidden md:block">
-            <SearchBar onSearch={handleSearch} />
-          </div>
+            {/* Search Bar */}
+            <div className="hidden md:block">
+              <SearchBar onSearch={handleSearch} />
+            </div>
 
-          {/* CTA Button */}
-          <Link to="/editor">
-            <Button className="flex items-center gap-2">
+            {/* Create Button */}
+            <Button 
+              className="flex items-center gap-2"
+              onClick={() => navigate('/editor')}
+            >
               <ApperIcon name="Plus" className="w-4 h-4" />
-              Create Pen
+              New Pen
             </Button>
-          </Link>
+            
+            {/* User Section */}
+            {user && (
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-slate-300">
+                  Welcome, {user.firstName || user.emailAddress}
+                </span>
+                <Button
+                  variant="secondary"
+                  onClick={logout}
+                  className="flex items-center gap-2"
+                >
+                  <ApperIcon name="LogOut" className="w-4 h-4" />
+                  Logout
+                </Button>
+              </div>
+            )}
+          </nav>
 
           {/* Mobile Menu Button */}
           <button className="md:hidden text-slate-400 hover:text-white">

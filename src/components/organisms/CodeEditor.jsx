@@ -13,7 +13,6 @@ const CodeEditor = ({ pen, onSave, onTitleChange }) => {
   const [showConsole, setShowConsole] = useState(true);
   const iframeRef = useRef(null);
   const consoleEndRef = useRef(null);
-
   // Console message capture system
   useEffect(() => {
     const handleMessage = (event) => {
@@ -55,7 +54,7 @@ const CodeEditor = ({ pen, onSave, onTitleChange }) => {
   }, [consoleMessages, showConsole]);
 
   // Auto-save functionality
-  useEffect(() => {
+useEffect(() => {
     const saveTimer = setTimeout(() => {
       if (html || css || javascript) {
         const penData = {
@@ -284,7 +283,7 @@ const [layoutMode, setLayoutMode] = useState('horizontal'); // 'horizontal' or '
 title="Code Preview"
             ref={iframeRef}
             srcDoc={`
-              <!DOCTYPE html>
+<!DOCTYPE html>
               <html>
                 <head>
                   <style>${css}</style>

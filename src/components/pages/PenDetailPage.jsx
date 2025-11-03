@@ -53,7 +53,7 @@ const { id } = useParams();
   }
 
   const handleFork = () => {
-    const forkedPenData = {
+const forkedPenData = {
       title: `Fork of ${pen.title}`,
       html: pen.html,
       css: pen.css,
@@ -235,7 +235,7 @@ const { id } = useParams();
                     srcDoc={`
                       <!DOCTYPE html>
                       <html>
-                        <head>
+<head>
                           <style>${pen.css}</style>
                         </head>
                         <body>
@@ -262,7 +262,7 @@ const { id } = useParams();
 
                 {/* HTML */}
                 {pen.html && (
-                  <CodePanel
+<CodePanel
                     title="HTML"
                     code={pen.html}
                     language="html"
