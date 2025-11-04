@@ -1,14 +1,13 @@
-import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useContext } from 'react';
-import { AuthContext } from '@/App';
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useAuth } from "@/layouts/Root";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isInitialized } = useContext(AuthContext);
-  
+  const { isInitialized } = useAuth();
+  const { user } = useSelector(state => state.user);
   useEffect(() => {
     if (isInitialized) {
       // Show login UI in this component

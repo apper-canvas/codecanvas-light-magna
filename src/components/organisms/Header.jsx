@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { AuthContext } from "@/App";
+import { useAuth } from "@/layouts/Root";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import SearchBar from "@/components/molecules/SearchBar";
@@ -10,7 +10,7 @@ import SearchBar from "@/components/molecules/SearchBar";
 const Header = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
-  const { logout } = useContext(AuthContext);
+const { logout } = useAuth();
 
   const handleSearch = (query) => {
     if (query.trim()) {
