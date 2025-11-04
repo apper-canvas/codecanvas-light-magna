@@ -1,15 +1,14 @@
 {
-  "/": {
+"/": {
     "allow": {
       "when": {
         "conditions": [
           {
-            "label": "Homepage is accessible to authenticated users",
-            "rule": "authenticated"
+            "label": "Homepage is accessible to all users",
+            "rule": "public"
           }
         ]
-      },
-      "redirectOnDeny": "/login"
+      }
     }
   },
   "/trending": {
